@@ -5,8 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sword</title>
 <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
+<link rel="preload" href="fonts/UncialAntiqua-Regular.ttf" as="font" type="font/ttf" crossorigin>
 <style>
-  html, body { height: 100%; margin: 0; overflow: hidden; background: #fff; color: #111; }
+  /* the title's font (SIL Open Font License, fonts/OFL.txt); build.py measures the titles with it */
+  @font-face {
+    font-family: "Uncial Antiqua";
+    src: url("fonts/UncialAntiqua-Regular.ttf") format("truetype");
+    font-display: block;
+  }
+  html, body { height: 100%; margin: 0; overflow: hidden; background: #f4f4f4; color: #111; }
   body { display: flex; align-items: center; justify-content: center; cursor: pointer; }
   /* the svg has only a viewBox, so it scales to this box (keeping its shape), lines and all.
      dvh is the height actually visible: on phones vh counts the space under the browser's
@@ -21,11 +28,12 @@ from pyscript import HTML, display, when
 import sword
 
 parts = sword.load()
+deck = sword.Deck(len(parts["phrases"]))   # every inscription once before any repeats
 
 
 @when("click", "body")
 def draw(event=None):
-    display(HTML(sword.random_svg(parts)), target="sword", append=False)
+    display(HTML(sword.random_svg(parts, deck=deck)), target="sword", append=False)
 
 
 draw()
