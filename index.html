@@ -6,10 +6,12 @@
 <title>Sword</title>
 <script type="module" src="https://pyscript.net/releases/2025.8.1/core.js"></script>
 <style>
-  html, body { height: 100%; margin: 0; background: #fff; color: #111; }
+  html, body { height: 100%; margin: 0; overflow: hidden; background: #fff; color: #111; }
   body { display: flex; align-items: center; justify-content: center; cursor: pointer; }
-  /* the svg has only a viewBox, so it scales to this box (keeping its shape), lines and all */
-  svg { display: block; width: 94vw; height: 94vh; }
+  /* the svg has only a viewBox, so it scales to this box (keeping its shape), lines and all.
+     dvh is the height actually visible: on phones vh counts the space under the browser's
+     address bar and toolbars too, so a vh-tall sword runs off the screen (vh is the fallback) */
+  svg { display: block; width: 94vw; height: 94vh; height: 94dvh; }
 </style>
 </head>
 <body>
